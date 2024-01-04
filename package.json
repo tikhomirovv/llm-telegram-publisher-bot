@@ -4,9 +4,10 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon"
+    "dev": "NODE_ENV=development bun run src/index.ts"
   },
   "dependencies": {
+    "js-logger": "^1.6.1",
     "openai": "^4.24.1",
     "telegraf": "^4.15.3"
   },
