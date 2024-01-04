@@ -43,11 +43,11 @@ OPENAI_KEY="your_openai_key"
 
 2. Настройте параметры LLM, промпт и расписание в конфигурационном файле.
 
-Конфигурация лежит в [./config](). По-умолчанию загружается [default.json](./config/default.json), можно переопределить конфигурацию добавлением файлика с окружением (`{NODE_ENV_VAR}.json`, `production.json` например) или локальный `local.json` / `local-{NOTE_ENV_VAR}.json`.
+Конфигурация лежит в [./config](./config). По-умолчанию загружается [default.json](./config/default.json), можно переопределить конфигурацию добавлением файлика с окружением (`{NODE_ENV_VAR}.json`, `production.json` например) или локальный `local.json` / `local-{NOTE_ENV_VAR}.json`.
 
-Подробнее о файлах конфигурации: https://github.com/node-config/node-config/wiki/Configuration-Files#file-load-order
-Подробнее о формате cron-расписания: https://www.npmjs.com/package/node-cron#cron-syntax
-Подробнее о настройках для ChatGPT: https://platform.openai.com/docs/api-reference/chat/create
+ - Подробнее о файлах конфигурации: https://github.com/node-config/node-config/wiki/Configuration-Files#file-load-order
+ - Подробнее о формате cron-расписания: https://www.npmjs.com/package/node-cron#cron-syntax
+ - Подробнее о настройках для ChatGPT: https://platform.openai.com/docs/api-reference/chat/create
 
 ## Запуск
 
@@ -56,6 +56,7 @@ OPENAI_KEY="your_openai_key"
 ```bash
 make dev # development mode
 # make start # production mode
+# make build && make run # build docker image, create and run container
 ```
 
 ## Поддержка
