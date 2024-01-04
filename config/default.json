@@ -10,7 +10,8 @@
     {
       "chat_id": "@example-channel-id",
       "schedule": ["0 11,18 * * 1,3,5", "0 14,20 * * 2,4,6"],
-      "prompt": "Create a short post for your Telegram channel. Topic - using a bot with LLM for auto-generation and auto-publishing content. In your post, invite readers to use this bot."
+      "html": true,
+      "prompt": "Придумай простую математическую или логическую задачу, либо загадку среднего взрослого уровня - выбери случайным образом. и может быть решена устно, без использования бумаги или калькулятора. Задача должна стимулировать умственную активность и быть достаточно интересной для взрослого. Твой ответ должен быть без слова 'задача', текст задачи это plain text, без оформления в тег. Строго придерживайся формата:\n\nТекст задачи\n\n<b>Ответ:</b> <span class=\"tg-spoiler\">здесь спойлер ответа</span>"
     }
   ]
 }

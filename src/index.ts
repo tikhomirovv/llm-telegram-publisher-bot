@@ -1,7 +1,8 @@
+import config from "config"
 import { Telegraf } from "telegraf"
 import logger from "@/logger"
-import config from "config"
 import { env } from "@/env"
+import { getPromptHTML } from "@/prompt"
 import { start as scheduleStart, stopAll as scheduleStop } from "@/schedule"
 import { generate as generatePost } from "@/generator"
 
@@ -12,14 +13,23 @@ type Channel = {
   chat_id: string
   schedule: string[]
   prompt: string
+  html?: boolean
 }
 
 const channels: Channel[] = config.get("channels")
 channels.forEach((channel) => {
   scheduleStart(channel.schedule, async () => {
-    const message = await generatePost(user, channel.prompt)
+    let prompt: string = channel.prompt
+    let extra = {}
+    if (channel.html) {
+      prompt += "\n\n" + getPromptHTML()
+      extra = { parse_mode: "html" }
+    }
+    const message = await generatePost(user, prompt)
+    logger.debug("[Index] Prompt:", prompt)
+    logger.debug("[Index] Generated post:", message)
     bot.telegram
-      .sendMessage(channel.chat_id, message)
+      .sendMessage(channel.chat_id, message, extra)
       .then((result) => logger.debug("Message sent", result))
       .catch((e) => logger.error("Message send error", e))
   })
