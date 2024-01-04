@@ -1,21 +1,29 @@
 import { Telegraf } from "telegraf"
 import logger from "@/logger"
+import config from "config"
 import { env } from "@/env"
-import { start as scheduleStart, stop as scheduleStop } from "@/schedule"
+import { start as scheduleStart, stopAll as scheduleStop } from "@/schedule"
 import { generate as generatePost } from "@/generator"
 
 const bot = new Telegraf(env.TELEGRAM_BOT_TOKEN)
-const channelId = env.TELEGRAM_CHAT_ID
+const user: string = config.get("id")
 
-async function generateAndPost() {
-  const message = await generatePost()
-  bot.telegram
-    .sendMessage(channelId, message)
-    .then((result) => logger.debug("Message sent", result))
-    .catch((e) => logger.error("Message send error", e))
+type Channel = {
+  chat_id: string
+  schedule: string[]
+  prompt: string
 }
 
-scheduleStart(generateAndPost)
+const channels: Channel[] = config.get("channels")
+channels.forEach((channel) => {
+  scheduleStart(channel.schedule, async () => {
+    const message = await generatePost(user, channel.prompt)
+    bot.telegram
+      .sendMessage(channel.chat_id, message)
+      .then((result) => logger.debug("Message sent", result))
+      .catch((e) => logger.error("Message send error", e))
+  })
+})
 
 // bot.start((ctx) => ctx.reply("Welcome!"))
 // bot.launch()
