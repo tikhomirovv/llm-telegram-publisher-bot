@@ -1,0 +1,10 @@
+{
+  "gpt_params": {
+    "model": "gpt-4-1106-preview",
+    "temperature": 1,
+    "presence_penalty": 0.0,
+    "top_p": 0.8
+  },
+  "timezone": "Europe/Moscow",
+  "schedule": [" * * * * *"]
+}
