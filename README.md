@@ -54,9 +54,14 @@ OPENAI_KEY="your_openai_key"
 Чтобы запустить бота, используйте следующую команду:
 
 ```bash
-make dev # development mode
-# make start # production mode
-# make build && make run # build docker image, create and run container
+# development mode
+make dev
+
+# or production mode
+make start
+
+# or build docker image, create and run container
+make build && make run
 ```
 
 ## Поддержка
