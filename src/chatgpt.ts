@@ -34,8 +34,6 @@ class ChatGPT {
       ...this.params,
       ...(temperature !== undefined ? { temperature } : {}),
     }
-
-    logger.debug("[GPT] Temperature:", params, temperature)
     try {
       return await this.openai.chat.completions.create({
         user,
