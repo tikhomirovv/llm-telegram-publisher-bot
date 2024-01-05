@@ -6,7 +6,7 @@
     "presence_penalty": 0.0
   },
   "schedule_timezone": "Europe/Moscow",
-  "channels": [
+  "posts": [
     {
       "chat_id": "@example-first-channel-id",
       "schedule": ["30 15 * * *"],
