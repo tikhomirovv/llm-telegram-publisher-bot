@@ -14,6 +14,7 @@ type Channel = {
   schedule: string[]
   prompt: string
   html?: boolean
+  temperature?: number
 }
 
 const channels: Channel[] = config.get("channels")
@@ -25,7 +26,7 @@ channels.forEach((channel) => {
       prompt += "\n\n" + getPromptHTML()
       extra = { parse_mode: "html" }
     }
-    const message = await generatePost(user, prompt)
+    const message = await generatePost(user, prompt, channel.temperature)
     logger.debug("[Index] Prompt:", prompt)
     logger.debug("[Index] Generated post:", message)
     bot.telegram

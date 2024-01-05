@@ -1,5 +1,5 @@
-import Logger from "js-logger"
-import { env } from "./env"
+import logger from "@/logger"
+import { env } from "@/env"
 import config from "config"
 import OpenAI from "openai"
 
@@ -29,15 +29,21 @@ class ChatGPT {
     this.params = params
   }
 
-  async chat(user: string, messages: Message[]) {
+  async chat(user: string, messages: Message[], temperature?: number) {
+    const params = {
+      ...this.params,
+      ...(temperature !== undefined ? { temperature } : {}),
+    }
+
+    logger.debug("[GPT] Temperature:", params, temperature)
     try {
       return await this.openai.chat.completions.create({
         user,
         messages,
-        ...this.params,
+        ...params,
       })
     } catch (e: any) {
-      Logger.error(`[GPT] Error while chat completion`, e)
+      logger.error(`[GPT] Error while chat completion`, e)
     }
   }
 }

@@ -2,9 +2,13 @@ import logger from "@/logger"
 import { chatgpt } from "@/chatgpt"
 import { Role, type Message } from "@/chatgpt"
 
-export async function generate(user: string, prompt: string): Promise<string> {
+export async function generate(
+  user: string,
+  prompt: string,
+  temperature?: number
+): Promise<string> {
   const message: Message = { role: Role.User, content: prompt }
-  const completion = await chatgpt.chat(user, [message])
+  const completion = await chatgpt.chat(user, [message], temperature)
   if (!completion) {
     throw new Error("[Generator] ChatGPT response error", completion)
   }

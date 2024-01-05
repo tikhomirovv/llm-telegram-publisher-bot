@@ -18,4 +18,4 @@ The message you return must be in the specified `html` format. Only plain text a
 <blockquote>Block quotation started\nBlock quotation continued\nThe last line of the block quotation</blockquote>
 ```
 
-Use these tags as example based on context. Do not wrap the message in ``` characters.
+Use these tags as example based on context. Do not wrap the message in ```html characters.
